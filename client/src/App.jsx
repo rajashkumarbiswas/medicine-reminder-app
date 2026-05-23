@@ -6,9 +6,13 @@ function App() {
 
   const addMedicine = () => {
     if (medicine === "") return;
-
     setList([...list, medicine]);
     setMedicine("");
+  };
+
+  const deleteMedicine = (index) => {
+    const newList = list.filter((_, i) => i !== index);
+    setList(newList);
   };
 
   return (
@@ -22,13 +26,19 @@ function App() {
         placeholder="Enter medicine name"
       />
 
-      <button onClick={addMedicine}>
-        Add
-      </button>
+      <button onClick={addMedicine}>Add</button>
 
       <ul>
         {list.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index}>
+            {item}
+            <button
+              onClick={() => deleteMedicine(index)}
+              style={{ marginLeft: "10px" }}
+            >
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     </div>
